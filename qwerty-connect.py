@@ -1,6 +1,8 @@
-from pynput import keyboard
+import pickle
+import socket
 
-import socket, pickle
+from pynput.keyboard import Key
+from pynput.keyboard import Listener
 
 host = input('IP Address? :')
 port = 38042
@@ -20,19 +22,19 @@ def on_press(key):
 
 def on_release(key):
     print('{0} released'.format(key))
-    if key == keyboard.Key.esc:
+    if key == Key.esc:
         # Stop listener
         return False
     socket.send(pickle.dumps(key) * 2)
 
 # Collect events until released
-with keyboard.Listener(
+with Listener(
         on_press=on_press,
         on_release=on_release) as listener:
     listener.join()
 
 # ...or, in a non-blocking fashion:
-listener = keyboard.Listener(
+listener = Listener(
     on_press=on_press,
     on_release=on_release)
 listener.start()
