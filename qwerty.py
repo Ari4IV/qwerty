@@ -16,14 +16,19 @@ def _live_stream(data, release_standard_value=200):
         keyboard.press(key)
 
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socket:
-    socket.bind((host, port))
-    print("qwerty is listening at port", port)
-    socket.listen()
-    connect, address = socket.accept()
-    qwertyMessage = 'Enemy Controller Activate!'
-    connect.sendall(qwertyMessage.encode())
-    with connect:
-        print('Standing by', address)
-        while True:
-            _live_stream(connect.recv(2048))
+def main():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socket:
+        socket.bind((host, port))
+        print("qwerty is listening at port", port)
+        socket.listen()
+        connect, address = socket.accept()
+        qwertyMessage = 'Enemy Controller Activate!'
+        connect.sendall(qwertyMessage.encode())
+        with connect:
+            print('Standing by', address)
+            while True:
+                _live_stream(connect.recv(2048))
+
+
+if __name__ == '__main__':
+    main()
