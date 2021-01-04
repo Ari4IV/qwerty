@@ -1,6 +1,7 @@
-from pynput.keyboard import Key, Controller
+import pickle
+import socket
 
-import socket, pickle
+from pynput.keyboard import Controller
 
 keyboard = Controller()
 
