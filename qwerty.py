@@ -3,30 +3,27 @@ import socket
 
 from pynput.keyboard import Controller
 
-keyboard = Controller()
-
-host = '0.0.0.0'
-port = 38042
+_keyboard = Controller()
 
 
 def _live_stream(data, release_standard_value=200):
     key = pickle.loads(data)
     if len(data) > release_standard_value:
-        keyboard.release(key)
+        _keyboard.release(key)
     else:
-        keyboard.press(key)
+        _keyboard.press(key)
 
 
-def main():
+def main(host='', port=38042):
     with socket.create_server((host, port)) as server:
         print('qwerty is listening at port', port)
         conn, addr = server.accept()
         print('Standing by', addr)
 
-        with conn as c:
-            c.send(b'Enemy Controller Activate!')
+        with conn:
+            conn.send(b'Enemy Controller Activate!')
             while True:
-                _live_stream(c.recv(2048))
+                _live_stream(conn.recv(2048))
 
 
 if __name__ == '__main__':
