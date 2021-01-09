@@ -10,10 +10,10 @@ def main(host, port=38042):
         print(f'qwerty: {sock.recv(26).decode()}')
 
         def on_press(key):
-            sock.send(pickle.dumps(key) * 1)
+            sock.send(pickle.dumps(key) + b'P')
 
         def on_release(key):
-            sock.send(pickle.dumps(key) * 2)
+            sock.send(pickle.dumps(key) + b'R')
 
         with Listener(on_press=on_press, on_release=on_release) as listener:
             listener.join()
