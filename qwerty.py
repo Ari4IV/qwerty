@@ -6,12 +6,12 @@ from pynput.keyboard import Controller
 _keyboard = Controller()
 
 
-def _live_stream(data, release_standard_value=200):
+def _live_stream(data):
     key = pickle.loads(data)
-    if len(data) > release_standard_value:
-        _keyboard.release(key)
-    else:
+    if data[-1] == 80:
         _keyboard.press(key)
+    else:
+        _keyboard.release(key)
 
 
 def main(host='', port=38042):
