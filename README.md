@@ -7,3 +7,9 @@ qwerty is a keyboard hijack. The qwerty is able to take control of the target co
 ### Uninstall modules
 
 	pip3 uninstall -r requirements.txt
+
+### Download qwerty
+
+You can download the latest version of qwerty by cloning the GitHub repository.
+
+	git clone https://github.com/BAIN5/qwerty.git
