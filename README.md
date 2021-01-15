@@ -13,7 +13,7 @@ qwerty is a keyboard hijack. The qwerty is able to take control of the target co
 
 You can download the latest version of qwerty by cloning the GitHub repository.
 
-        git clone https://github.com/BAIN5/qwerty.git
+	git clone https://github.com/BAIN5/qwerty.git
 
 ### Install modules
 
