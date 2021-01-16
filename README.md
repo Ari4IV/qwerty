@@ -7,8 +7,8 @@ qwerty is a keyboard hijack. The qwerty is able to take control of the target co
 
 ### Tested on
 
-- Kali Linux 2020.4
-- Ubuntu 20.04.1 LTS
+- [Kali Linux 2020.4](https://www.kali.org/downloads/)
+- [Ubuntu 20.04.1 LTS](https://ubuntu.com/download)
 
 ### Download qwerty
 
