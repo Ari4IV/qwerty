@@ -3,6 +3,8 @@ import socket
 
 from pynput.keyboard import Controller
 
+from output import BANNER
+
 _keyboard = Controller()
 
 
@@ -27,4 +29,5 @@ def main(host='', port=38042):
 
 
 if __name__ == '__main__':
+    print(BANNER)
     main()

