@@ -1,4 +1,5 @@
 from colorama import Fore
+from colorama import Style
 
 BANNER = f"""{Fore.YELLOW}
                           _         
@@ -8,4 +9,5 @@ BANNER = f"""{Fore.YELLOW}
  | (_| |\ V  V /  __/ |  | |_| |_| |
   \__, | \_/\_/ \___|_|   \__|\__, |
      | |                       __/ |
-     |_|                      |___/ """
+     |_|                      |___/ 
+{Style.RESET_ALL}"""
