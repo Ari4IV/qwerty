@@ -58,7 +58,10 @@ class Qwerty:
             with conn:
                 conn.send(b'Enemy Controller Activate!')
                 while True:
-                    self._live_stream(conn.recv(2048))
+                    try:
+                        self._live_stream(conn.recv(2048))
+                    except pickle.UnpicklingError:
+                        pass
 
 
 def main():
