@@ -51,11 +51,11 @@ class Qwerty:
             if data[-1] == 80:
                 _keyboard.press(key)
                 SPC += 1
-                print(f'{SPC}\t[SP]: {len(key)}')
+                print(f'{SPC}\t[SP]: {len(data)}')
             else:
                 _keyboard.release(key)
                 SRC += 1
-                print(f'{SRC}\t[SR]: {len(key)}')
+                print(f'{SRC}\t[SR]: {len(data)}')
 
         with socket.create_server((self.host, self.port)) as server:
             print('qwerty is listening at port', self.port)
