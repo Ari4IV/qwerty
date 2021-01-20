@@ -26,15 +26,17 @@ class Qwerty:
 
             def on_press(key):
                 global CPC
-                sock.send(pickle.dumps(key) + b'P')
+                data = pickle.dumps(key) + b'P'
+                sock.send(data)
                 CPC += 1
-                print(f'{CPC}: CP')
+                print(f'{CPC}\t[CP]: {len(data)}')
 
             def on_release(key):
                 global CRC
-                sock.send(pickle.dumps(key) + b'R')
+                data = pickle.dumps(key) + b'R'
+                sock.send(data)
                 CRC += 1
-                print(f'{CRC}: CR')
+                print(f'{CRC}\t[CR]: {len(data)}')
 
             with Listener(on_press=on_press, on_release=on_release) as listener:
                 listener.join()
@@ -49,11 +51,11 @@ class Qwerty:
             if data[-1] == 80:
                 _keyboard.press(key)
                 SPC += 1
-                print(f'{SPC}: SP')
+                print(f'{SPC}\t[SP]: {len(key)}')
             else:
                 _keyboard.release(key)
                 SRC += 1
-                print(f'{SRC}: SR')
+                print(f'{SRC}\t[SR]: {len(key)}')
 
         with socket.create_server((self.host, self.port)) as server:
             print('qwerty is listening at port', self.port)
