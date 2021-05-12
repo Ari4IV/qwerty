@@ -1,37 +1,19 @@
-from pynput import keyboard
-
 import socket, pickle
+
+from pynput.keyboard import Key
+from pynput.keyboard import Listener
 
 host = input('IP Address? :')
 port = 38042
 
-socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket.connect((host, port))
+with socket.create_connection((host, port)) as sock:
+    print(f'qwerty: {sock.recv(2048).decode()}')
 
-qwertyMessage = str(socket.recv(2048), encoding='utf-8')
-print('qwerty:', qwertyMessage)
+    def on_press(key):
+        sock.send(pickle.dumps(key) + b'P')
 
-def on_press(key):
-    try:
-        print('alphanumeric key {0} pressed'.format(key.char))
-    except AttributeError:
-        print('special key {0} pressed'.format(key))
-    socket.send(pickle.dumps(key))
+    def on_release(key):
+        sock.send(pickle.dumps(key) + b'R')
 
-def on_release(key):
-    print('{0} released'.format(key))
-    if key == keyboard.Key.esc:
-        # Stop listener
-        return False
-
-# Collect events until released
-with keyboard.Listener(
-        on_press=on_press,
-        on_release=on_release) as listener:
-    listener.join()
-
-# ...or, in a non-blocking fashion:
-listener = keyboard.Listener(
-    on_press=on_press,
-    on_release=on_release)
-listener.start()
+    with Listener(on_press=on_press, on_release=on_release) as listener:
+        listener.join()
